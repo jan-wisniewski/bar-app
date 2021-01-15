@@ -22,7 +22,7 @@ public class BillService {
     private final OrderRepository orderRepository;
     private final BillRepository billRepository;
 
-    public BillDto calculate(@RequestParam Long id, @RequestBody BillDto billDto) {
+    public BillDto create(@RequestParam Long id, @RequestBody BillDto billDto) {
         log.info("Enter BillService -> calculate() with: " + id.toString() + " and " + billDto);
         BigDecimal totalPrice = calculatePrice(id);
         Bill bill = Bill

@@ -10,6 +10,5 @@ import java.util.List;
 @Builder
 public class OrderDto {
     private Long id;
-    private String paymentType;
     private List<Long> productIds;
 }

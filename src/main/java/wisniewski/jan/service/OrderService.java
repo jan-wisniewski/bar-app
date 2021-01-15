@@ -33,7 +33,8 @@ public class OrderService {
                 .stream()
                 .map(e -> productRepository.findById(e).orElseThrow())
                 .collect(Collectors.toList()));
-        return Mapper.fromOrderToOrderDto(orderRepository.save(order));
+        orderRepository.save(order);
+        return orderDto;
     }
 
 }
