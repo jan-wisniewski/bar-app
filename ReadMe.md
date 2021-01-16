@@ -50,33 +50,53 @@
 * maven-project-info-reports-plugin 3.1.1
 
 ## Setup
-1. Build application from root directory of project and run command
+1. Build Application 
+   
+To build application from root directory of project run command
 
 `mvn clean install`
 
-2. Start Spring Boot App via terminal by typing
+2. Spring Boot
+
+Start Spring Boot App via terminal by typing
 
 `mvn spring-boot:run`
 
-3. After starting app you can use Swagger to test REST API. Swagger is available at 
+3. Swagger
+
+After starting app you can use Swagger to test REST API. Swagger is available at 
 
 `http://localhost:8080/swagger-ui.html`
 
-4. Fristly, you should add some products to the database at 
+4. Adding Product
 
-`http://localhost:8080/api/product/create`
+Fristly, you should add some products to the database. In Swagger go to the below tab. Press "Try it out" button and complete JSON request. The most important are name and price of the product.
+   
+ID can remain set to 0 because a new ID will be generated after the entity has been correctly added to the database so please check "Response Body" section after adding product correctly.
 
-5. After that you can place the order at
+`/api/product/create`
 
-`http://localhost:8080/api/order/create`
+5. Create Order
 
-6. Then you can bill the order
+After adding products, you can place the order at `/api/order/create`. As previously please complete JSON request. If you don't remember ID's of added product, you can check all of the products stored in database at `/api/product/all`
 
-`http://localhost:8080/api/order/{orderId}/bill`
+Important! Please remember order ID which will be display at "Response Body" section. 
 
-7. And pay for this order
+5. Generate Bill
 
-`http://localhost:8080/api/order/{orderId}/payment`
+Before you be able to pay for the order, you need to generate a bill. To do this, go to
+
+`api/order/{orderId}/bill`
+
+As previously, ID in JSON can remain set to 0.
+
+6. Pay For The Order
+
+You need to pay the generated bill to complete the entire ordering process.
+
+Payments type are defined at PaymentType class
+
+`/api/order/{orderId}/payment`
 
 ## Database
 The application has a built-in h2 database. To enter the database and view entries, go to.
