@@ -1,5 +1,6 @@
 package wisniewski.jan.models;
 
+import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

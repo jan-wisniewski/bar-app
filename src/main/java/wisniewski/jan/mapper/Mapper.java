@@ -10,6 +10,7 @@ import wisniewski.jan.models.Order;
 import wisniewski.jan.models.Payment;
 import wisniewski.jan.models.Product;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 public interface Mapper {
@@ -25,6 +26,7 @@ public interface Mapper {
     static ProductDto fromProductToProductDto(Product product) {
         return ProductDto
                 .builder()
+                .id(product.getId())
                 .name(product.getName())
                 .price(product.getPrice())
                 .build();
@@ -33,6 +35,7 @@ public interface Mapper {
     static OrderDto fromOrderToOrderDto(Order order) {
         return OrderDto
                 .builder()
+                .id(order.getId())
                 .productIds(order.getProduct().stream().map(Product::getId).collect(Collectors.toList()))
                 .build();
     }
@@ -54,8 +57,16 @@ public interface Mapper {
     static BillDto fromBillToBillDto(Bill bill){
         return BillDto
                 .builder()
+                .id(bill.getId())
                 .totalPrice(bill.getTotalPrice())
                 .build();
+    }
+
+    static List<ProductDto> fromProductListToProductDtoList(List<Product> productList){
+        return productList
+                .stream()
+                .map(Mapper::fromProductToProductDto)
+                .collect(Collectors.toList());
     }
 
 }

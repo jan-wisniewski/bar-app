@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 @Data
 @Builder
 public class BillDto {
+    private Long id;
     private BigDecimal totalPrice;
 }
 

@@ -3,15 +3,13 @@ package wisniewski.jan.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
-import wisniewski.jan.mapper.Mapper;
+import wisniewski.jan.exceptions.OrderServiceException;
 import wisniewski.jan.models.Order;
-import wisniewski.jan.enums.PaymentType;
 import wisniewski.jan.dtos.OrderDto;
 import wisniewski.jan.repositories.OrderRepository;
 import wisniewski.jan.repositories.ProductRepository;
+import wisniewski.jan.validator.OrderDtoValidator;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
@@ -26,6 +24,15 @@ public class OrderService {
 
     public OrderDto add(OrderDto orderDto) {
         log.info("Enter orderService -> add() with: " + orderDto);
+        OrderDtoValidator validator = new OrderDtoValidator();
+        var errors = validator.validate(orderDto);
+        if (!errors.isEmpty()) {
+            throw new OrderServiceException("Invalid order!, errors: " + errors
+                    .entrySet()
+                    .stream()
+                    .map(e -> e.getKey()+ " => "+e.getValue())
+                    .collect(Collectors.joining(", ")));
+        }
         Order order = new Order();
         order.setDate(LocalDateTime.now());
         order.setProduct(orderDto.getProductIds()
@@ -34,7 +41,7 @@ public class OrderService {
                 .collect(Collectors.toList()));
         log.info("Order: " + order);
         orderRepository.save(order);
+        orderDto.setId(order.getId());
         return orderDto;
     }
-
 }

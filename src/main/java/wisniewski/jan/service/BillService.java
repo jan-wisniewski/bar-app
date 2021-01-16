@@ -30,8 +30,8 @@ public class BillService {
 
     public BillDto create(Long id) {
         log.info("Enter BillService -> calculate() with: " + id.toString());
+        Order order = orderRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Incorrect order id!"));
         BigDecimal totalPrice = calculatePrice(id);
-        Order order = orderRepository.findById(id).orElseThrow();
         Bill bill = Bill
                 .builder()
                 .totalPrice(totalPrice)
@@ -39,7 +39,9 @@ public class BillService {
                 .order(order)
                 .build();
         billRepository.save(bill);
-        return Mapper.fromBillToBillDto(bill);
+        BillDto billDto = Mapper.fromBillToBillDto(bill);
+        billDto.setId(bill.getId());
+        return billDto;
 
     }
 
