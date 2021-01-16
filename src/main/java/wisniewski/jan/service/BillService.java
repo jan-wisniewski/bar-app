@@ -8,13 +8,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import wisniewski.jan.dtos.BillDto;
 import wisniewski.jan.enums.OrderStatus;
 import wisniewski.jan.enums.PaymentType;
+import wisniewski.jan.mapper.Mapper;
 import wisniewski.jan.models.Bill;
 import wisniewski.jan.models.Order;
 import wisniewski.jan.models.Product;
 import wisniewski.jan.repositories.BillRepository;
 import wisniewski.jan.repositories.OrderRepository;
+import wisniewski.jan.repositories.PaymentRepository;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -24,20 +27,19 @@ public class BillService {
     private final OrderRepository orderRepository;
     private final BillRepository billRepository;
 
-    public BillDto create(Long id, BillDto billDto) {
-        log.info("Enter BillService -> calculate() with: " + id.toString() + " and " + billDto);
+
+    public BillDto create(Long id) {
+        log.info("Enter BillService -> calculate() with: " + id.toString());
         BigDecimal totalPrice = calculatePrice(id);
         Order order = orderRepository.findById(id).orElseThrow();
         Bill bill = Bill
                 .builder()
                 .totalPrice(totalPrice)
-                .payment(PaymentType.valueOf(billDto.getPaymentType()))
+                .date(LocalDateTime.now())
                 .order(order)
                 .build();
         billRepository.save(bill);
-        orderRepository.setNewStatus(id, OrderStatus.PAID);
-        billDto.setTotalPrice(totalPrice);
-        return billDto;
+        return Mapper.fromBillToBillDto(bill);
 
     }
 

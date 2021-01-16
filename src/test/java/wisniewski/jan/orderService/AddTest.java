@@ -66,7 +66,6 @@ public class AddTest {
 
         var bill = Bill
                 .builder()
-                .payment(PaymentType.CARD)
                 .totalPrice(BigDecimal.valueOf(1000))
                 .build();
 

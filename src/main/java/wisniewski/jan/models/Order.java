@@ -19,7 +19,6 @@ import java.util.List;
 @Entity
 @Table(name = "orders")
 @Data
-@Transactional
 public class Order {
 
     @Id

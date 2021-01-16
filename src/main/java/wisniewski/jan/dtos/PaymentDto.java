@@ -5,13 +5,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
-public class BillDto {
-    private BigDecimal totalPrice;
+public class PaymentDto {
+    private String paymentType;
 }
-

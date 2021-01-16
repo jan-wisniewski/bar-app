@@ -7,8 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import wisniewski.jan.dtos.BillDto;
 import wisniewski.jan.dtos.OrderDto;
+import wisniewski.jan.dtos.PaymentDto;
 import wisniewski.jan.service.BillService;
 import wisniewski.jan.service.OrderService;
+import wisniewski.jan.service.PaymentService;
 
 @Slf4j
 @RestController
@@ -18,16 +20,23 @@ public class OrderResource {
 
     private final OrderService orderService;
     private final BillService billService;
+    private final PaymentService paymentService;
 
     @PostMapping("/create")
     public ResponseEntity<OrderDto> create(@RequestBody OrderDto orderDto) {
-        log.info("Enter orderController -> create() with: " + orderDto);
+        log.info("Enter orderResource -> create() with: " + orderDto);
         return new ResponseEntity<OrderDto>(orderService.add(orderDto), HttpStatus.OK);
     }
 
-    @PostMapping("/{id}/calculate")
-    public ResponseEntity<BillDto> calculate(@PathVariable Long id, @RequestBody BillDto billDto) {
-        log.info("Enter orderController -> calculate() with: " + id.toString());
-        return new ResponseEntity<BillDto>(billService.create(id,billDto), HttpStatus.OK);
+    @PostMapping("/{id}/bill")
+    public ResponseEntity<BillDto> bill(@PathVariable Long id) {
+        log.info("Enter orderResource -> calculate() with: " + id.toString());
+        return new ResponseEntity<BillDto>(billService.create(id), HttpStatus.OK);
+    }
+
+    @PostMapping("/{id}/payment")
+    public ResponseEntity<PaymentDto> payment(@PathVariable Long id, @RequestBody PaymentDto paymentDto) {
+        log.info("Enter orderResource -> payment() with: " + id.toString());
+        return new ResponseEntity<PaymentDto>(paymentService.create(id,paymentDto), HttpStatus.OK);
     }
 }

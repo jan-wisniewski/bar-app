@@ -26,13 +26,13 @@ public class OrderService {
 
     public OrderDto add(OrderDto orderDto) {
         log.info("Enter orderService -> add() with: " + orderDto);
-        Order order = Mapper.fromOrderDtoToOrder(orderDto);
-        log.info("Order: " + order);
+        Order order = new Order();
         order.setDate(LocalDateTime.now());
         order.setProduct(orderDto.getProductIds()
                 .stream()
                 .map(e -> productRepository.findById(e).orElseThrow())
                 .collect(Collectors.toList()));
+        log.info("Order: " + order);
         orderRepository.save(order);
         return orderDto;
     }

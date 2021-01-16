@@ -7,29 +7,27 @@ import lombok.NoArgsConstructor;
 import wisniewski.jan.enums.PaymentType;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "bills")
+@Table(name = "payments")
 @Data
-public class Bill {
+public class Payment {
+
     @Id
     @GeneratedValue
     private Long id;
 
-    private BigDecimal totalPrice;
-
     private LocalDateTime date;
 
+    @Enumerated(EnumType.STRING)
+    private PaymentType paymentType;
+
     @OneToOne
-    @JoinColumn(name = "order_id", unique = true)
-    private Order order;
-
-    @OneToOne(mappedBy = "bill")
-    private Payment payment;
-
+    @JoinColumn(name = "bill_id", unique = true)
+    private Bill bill;
 }
