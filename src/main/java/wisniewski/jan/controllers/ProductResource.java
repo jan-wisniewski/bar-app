@@ -14,7 +14,7 @@ import wisniewski.jan.service.ProductService;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/product")
+@RequestMapping("api/product")
 public class ProductResource {
 
     private final ProductService productService;

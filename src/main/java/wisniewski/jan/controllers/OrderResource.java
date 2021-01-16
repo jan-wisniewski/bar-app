@@ -15,7 +15,7 @@ import wisniewski.jan.service.PaymentService;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/order")
+@RequestMapping("api/order")
 public class OrderResource {
 
     private final OrderService orderService;
