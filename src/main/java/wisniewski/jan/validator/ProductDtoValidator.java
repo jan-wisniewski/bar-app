@@ -2,6 +2,7 @@ package wisniewski.jan.validator;
 
 import lombok.extern.slf4j.Slf4j;
 import wisniewski.jan.dtos.ProductDto;
+import wisniewski.jan.validator.base.Validator;
 
 import java.math.BigDecimal;
 import java.util.HashMap;

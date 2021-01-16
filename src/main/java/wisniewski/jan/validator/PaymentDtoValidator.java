@@ -3,6 +3,7 @@ package wisniewski.jan.validator;
 import lombok.extern.slf4j.Slf4j;
 import wisniewski.jan.dtos.PaymentDto;
 import wisniewski.jan.enums.PaymentType;
+import wisniewski.jan.validator.base.Validator;
 
 import java.util.Arrays;
 import java.util.HashMap;

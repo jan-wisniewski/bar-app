@@ -1,6 +1,5 @@
-package wisniewski.jan.validator;
+package wisniewski.jan.validator.base;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public interface Validator<T> {

@@ -1,6 +1,7 @@
 package wisniewski.jan.validator;
 
 import wisniewski.jan.dtos.OrderDto;
+import wisniewski.jan.validator.base.Validator;
 
 import java.util.HashMap;
 import java.util.Map;

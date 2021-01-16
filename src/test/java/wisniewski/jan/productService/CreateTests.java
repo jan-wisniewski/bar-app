@@ -34,7 +34,7 @@ public class CreateTests {
 
         var productDto = ProductDto
                 .builder()
-                .name("Product1")
+                .name("Product")
                 .price(BigDecimal.ONE)
                 .build();
 
