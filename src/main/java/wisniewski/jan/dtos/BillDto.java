@@ -16,7 +16,5 @@ public class BillDto {
     //lokal
     private BigDecimal totalPrice;
     private String paymentType;
-    private Long orderId;
-
 }
 

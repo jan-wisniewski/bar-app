@@ -25,7 +25,7 @@ public class OrderResource {
         return new ResponseEntity<OrderDto>(orderService.add(orderDto), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}/calculate")
+    @PostMapping("/{id}/calculate")
     public ResponseEntity<BillDto> calculate(@PathVariable Long id, @RequestBody BillDto billDto) {
         log.info("Enter orderController -> calculate() with: " + id.toString());
         return new ResponseEntity<BillDto>(billService.create(id,billDto), HttpStatus.OK);

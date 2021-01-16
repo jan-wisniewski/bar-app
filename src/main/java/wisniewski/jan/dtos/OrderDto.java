@@ -9,6 +9,5 @@ import java.util.List;
 @Data
 @Builder
 public class OrderDto {
-    private Long id;
     private List<Long> productIds;
 }

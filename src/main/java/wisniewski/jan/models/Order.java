@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.springframework.transaction.annotation.Transactional;
+import wisniewski.jan.enums.OrderStatus;
 import wisniewski.jan.enums.PaymentType;
 
 import javax.persistence.*;
@@ -17,6 +19,7 @@ import java.util.List;
 @Entity
 @Table(name = "orders")
 @Data
+@Transactional
 public class Order {
 
     @Id
@@ -35,5 +38,8 @@ public class Order {
 
     @OneToOne(mappedBy = "order")
     private Bill bill;
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status = OrderStatus.UNPAID;
 
 }

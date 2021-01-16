@@ -28,7 +28,6 @@ public interface Mapper {
     static OrderDto fromOrderToOrderDto(Order order) {
         return OrderDto
                 .builder()
-                .id(order.getId())
                 .productIds(order.getProduct().stream().map(Product::getId).collect(Collectors.toList()))
                 .build();
     }
